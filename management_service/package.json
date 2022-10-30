@@ -1,0 +1,15 @@
+{
+  "name": "management_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "management_service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node management_service.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^4.3.7"
+  }
+}
