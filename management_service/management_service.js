@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://localhost:1883')
+const client = mqtt.connect('mqtt://test.mosquitto.org')
 
 client.on('connect', function () {
     console.log("Successful connection!");
@@ -27,7 +27,7 @@ client.on('connect', function () {
         product_id: 01,
         product_title: "Nice record",
         product_type: "record",
-        product_creation_timestamp: "2022-09-01"
+        product_creation_timestamp: "2018-11-13T20:20:39+00:00"
 }
     const messageFormatted = JSON.stringify(message);
     client.publish('management/new/product', messageFormatted);

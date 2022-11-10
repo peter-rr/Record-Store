@@ -1,0 +1,51 @@
+asyncapi: 2.5.0
+info:
+  title: Management service API
+  version: 1.0.0
+  description: This is the service that manages the new products created.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+defaultContentType: application/json
+servers:
+  development:
+    url: 0.0.0.0:1883
+    protocol: mqtt
+    description: Local development broker
+channels:
+  management/new/product:
+    description: New order being placed
+    subscribe:
+      operationId: produceNewProduct
+      message:
+        $ref: '#/components/messages/NewProductMessage'
+components:
+  messages:
+    NewProductMessage:
+      name: newProductMessage
+      title: New product message
+      summary: When a new product has been created.
+      payload:
+        $ref: '#/components/schemas/newProductMessagePayload'
+  schemas:
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        product_title:
+          type: string
+        product_type:
+          type: string
+          enum:
+            - record
+            - mp3
+            - merchandise
+    newProductMessagePayload:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            product_creation_timestamp:
+              type: string
+              format: date-time
