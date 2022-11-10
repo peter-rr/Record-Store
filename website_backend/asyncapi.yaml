@@ -1,0 +1,78 @@
+asyncapi: 2.5.0
+info:
+  title: Backend service API
+  version: 1.0.0
+  description: This is the website backend service that interact with users.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+defaultContentType: application/json
+
+servers:
+  development:
+    url: mqtt://test.mosquitto.org
+    protocol: mqtt
+    description: Local development broker
+    bindings:
+      mqtt:
+        clientId: notifications-service
+
+channels:
+  orderservice/new/order:
+    description: New order being placed
+    subscribe:
+      operationId: produceNewOrder
+      message:
+        $ref: '#/components/messages/NewOrderMessage'
+  management/new/product:
+    description: New order being placed
+    publish:
+      operationId: consumeNewProduct
+      message:
+        $ref: '#/components/messages/NewProductMessage'
+
+components:
+  messages:
+    NewProductMessage:
+      name: newProductMessage
+      title: New product message
+      summary: When a new product has been created.
+      payload:
+        $ref: '#/components/schemas/newProductMessagePayload'
+    NewOrderMessage:
+      name: newOrderMessage
+      title: New order message
+      summary: When a new order has been placed this message is sent.
+      payload:
+        $ref: '#/components/schemas/newOrderMessagePayload'
+  schemas:
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        product_title:
+          type: string
+        product_type:
+          type: string
+          enum:
+            - record
+            - mp3
+            - merchandise
+    newProductMessagePayload:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            product_creation_timestamp:
+              type: string
+              format: date-time
+    newOrderMessagePayload:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            order_timestamp:
+              type: string
+              format: date-time
