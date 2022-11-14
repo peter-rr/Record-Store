@@ -11,17 +11,15 @@ export default function (event) {
     return __awaiter(this, void 0, void 0, function* () {
         // Do something with consumeNewProduct event  
         const messageFormatted = JSON.stringify(event.payload);
-        console.log(`New product created!: ${messageFormatted}.`);
+        console.log(`New product created: ${messageFormatted}.`);
         // Send a new message to the broker
-        /* return {
+        console.log("Processing new order...");
+        console.log(`New order placed: ${messageFormatted}.`);
+        return {
             send: [{
-              payload: `New product created!  "${event.payload}".`,
-              channel: 'To which channel I want to send this message payload to'
-            },
-            {
-              payload: `New product created!  "${event.payload}".`,
-              channel: 'To which channel I want to send this message payload to'
-            }]
-          } */
+                    payload: event.payload,
+                    channel: 'orderservice/new/order'
+                }]
+        };
     });
 }

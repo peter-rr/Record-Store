@@ -28,7 +28,7 @@ client.on('connect', function () {
         product_title: "Nice record",
         product_type: "record",
         product_creation_timestamp: "2018-11-13T20:20:39+00:00"
-}
+    }
     const messageFormatted = JSON.stringify(message);
     client.publish('management/new/product', messageFormatted);
     console.log(messageFormatted);
