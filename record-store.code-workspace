@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "website_backend"
+		},
+		{
+			"path": "management_service"
+		},
+		{
+			"path": "order_service"
+		}
+	],
+	"settings": {}
+}

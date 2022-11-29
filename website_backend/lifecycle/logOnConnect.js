@@ -1,7 +1,8 @@
 export default async function ({ glee, serverName, server, connection }) {
-  console.log('Connection with mqtt server established');
+  console.log('Connection with mqtt broker established');
+  return {}
 }
 
-export const lifecycleEvent = 'onServerConnectionOpen';
-export const servers = ['mqtt://localhost:1883'];
-export const channels = ['/management/new/product', '/orderservice/new/order'];
+export const lifecycleEvent = 'onConnect';
+export const servers = ['development'];
+// export const channels = ['/management/new/product'];

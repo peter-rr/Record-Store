@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 export default function ({ glee, serverName, server, connection }) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Connection with mqtt server established');
+        console.log('Connection with mqtt broker established');
+        return {};
     });
 }
-export const lifecycleEvent = 'onServerConnectionOpen';
-export const servers = ['mqtt://localhost:1883'];
-export const channels = ['/management/new/product', '/orderservice/new/order'];
+export const lifecycleEvent = 'onConnect';
+export const servers = ['development'];
+// export const channels = ['/management/new/product'];
