@@ -9,7 +9,7 @@ info:
 defaultContentType: application/json
 servers:
   development:
-    url: 0.0.0.0:1883
+    url: mqtt://test.mosquitto.org
     protocol: mqtt
     description: Local development broker
 channels:
