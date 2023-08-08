@@ -1,4 +1,3 @@
-import { channels } from "../lifecycle/logOnConnect";
 
 export default async function (event) {  
   // Do something with consumeNewProduct event  
