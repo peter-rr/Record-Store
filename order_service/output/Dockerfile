@@ -1,14 +1,13 @@
-FROM node:12-alpine
+FROM node:18
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /user/order_service/output
 
 # Install app dependencies
-COPY package.json /usr/src/app/
+COPY package*.json ./
 RUN npm install
 
 # Copy app source
-COPY . /usr/src/app
+COPY . .
 
-CMD [ "npm", "start" ]
+CMD [ "node", "src/api/index.js" ]
