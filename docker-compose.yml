@@ -1,9 +1,34 @@
 services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
+  management_service:
+    image: management_service:latest
+  website_backend:
+    image: website_backend:latest
+  order_service:
+    image: order_service:latest
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    build:
+      context: .
     volumes:
-      - .:/code
-  redis:
-    image: redis
+      - type: bind
+        source: ./config/
+        target: /mosquitto/config/
+      - type: bind
+        source: ./log/
+        target: /mosquitto/log/
+      - type: volume
+        source: data
+        target: /mosquitto/data/
+    ports:
+      - target: 1883
+        published: 1883
+        protocol: tcp
+        mode: host
+      - target: 9001
+        published: 9001
+        protocol: tcp
+        mode: host
+
+volumes:
+  data:
+    name: "mqtt-broker-data"
